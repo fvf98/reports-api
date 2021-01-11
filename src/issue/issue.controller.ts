@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateIssueDto } from './dtos';
 import { IssueService } from './issue.service';
 
-@ApiTags('Issue')
+@ApiTags('Issues')
 @Controller('issue')
 export class IssueController {
     constructor(
