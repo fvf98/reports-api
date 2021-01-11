@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE_USERNAME } from './config/constants';
 import { ReportModule } from './report/report.module';
+import { UserModule } from './user/user.module';
+import { IssueModule } from './issue/issue.module';
 
 @Module({
   imports: [
@@ -28,7 +30,9 @@ import { ReportModule } from './report/report.module';
         logger: 'file',
       }),
     }),
-    ReportModule
+    ReportModule,
+    UserModule,
+    IssueModule
   ],
   controllers: [AppController],
   providers: [AppService],

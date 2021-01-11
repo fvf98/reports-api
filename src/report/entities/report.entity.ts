@@ -1,3 +1,5 @@
+import { Issue } from 'src/issue/entities';
+import { User } from 'src/user/entities';
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -15,8 +17,13 @@ export class Report {
     @Column({ type: 'varchar', length: 150 })
     title!: string;
 
-    @Column({ type: 'int' })
-    troubleType!: number;
+    @ManyToOne(
+        () => Issue,
+        issue => issue.report,
+        { eager: true },
+    )
+    @JoinColumn({ name: 'issueType' })
+    issueType!: Issue;
 
     @Column({ type: 'varchar', length: 150 })
     location!: string;
@@ -27,11 +34,21 @@ export class Report {
     @Column({ type: 'simple-array', nullable: true })
     images: string[];
 
-    @Column({ nullable: true })
-    asigned: number;
+    @ManyToOne(
+        () => User,
+        user => user.report,
+        { eager: true },
+    )
+    @JoinColumn({ name: 'asigned' })
+    asigned: User;
 
-    @Column()
-    author: number;
+    @ManyToOne(
+        () => User,
+        user => user.report,
+        { eager: true },
+    )
+    @JoinColumn({ name: 'author' })
+    author: User;
 
     @Column({ type: 'char', default: 'P' }) // 'P' is for pending
     status: string;

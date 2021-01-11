@@ -3,10 +3,10 @@ import { INestApplication } from '@nestjs/common';
 
 export const initSwagger = (app: INestApplication) => {
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('MyBlog API')
+    .setTitle('Reports API')
     .addBearerAuth()
     .setDescription(
-      'Esta es una API Creada con NestJS con un CRUD básico para un Blog.',
+      'Esta es una API Creada con NestJS para el manejo de reportes de incidencias en una universidad',
     )
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);

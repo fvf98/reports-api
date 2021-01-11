@@ -1,15 +1,19 @@
-import { IsArray, IsNumber, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateReportDto {
+    @IsNotEmpty()
     @IsString()
     title: string;
 
+    @IsNotEmpty()
     @IsNumber()
-    troubleType!: number;
+    issueType!: number;
 
+    @IsNotEmpty()
     @IsString()
     location!: string;
 
+    @IsNotEmpty()
     @IsString()
     description!: string;
 
