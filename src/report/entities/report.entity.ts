@@ -7,6 +7,7 @@ import {
     CreateDateColumn,
     ManyToOne,
     JoinColumn,
+    BeforeUpdate,
 } from 'typeorm';
 
 @Entity('report')
@@ -49,6 +50,15 @@ export class Report {
     )
     @JoinColumn({ name: 'author' })
     author: User;
+
+    @BeforeUpdate()
+    async statusChange() {
+        if (!this.asigned) {
+            this.status = "P";
+            return;
+        }
+        this.status = "A";
+    }
 
     @Column({ type: 'char', default: 'P' }) // 'P' is for pending
     status: string;

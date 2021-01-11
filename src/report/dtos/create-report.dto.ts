@@ -22,8 +22,5 @@ export class CreateReportDto {
     images: string[];
 
     @IsNumber()
-    asigned: number;
-
-    @IsNumber()
     author: number;
 }
