@@ -8,8 +8,8 @@ export const setDefaultUser = async (config: ConfigService) => {
 
   const defaultUser = await userRepository
     .createQueryBuilder()
-    .where('user = :user', {
-      user: config.get<string>('DEFAULT_USER'),
+    .where('userName = :userName', {
+      userName: config.get<string>('DEFAULT_USER'),
     })
     .getOne();
 
@@ -17,7 +17,7 @@ export const setDefaultUser = async (config: ConfigService) => {
     const adminUser = userRepository.create({
       name: config.get<string>(DEFAULT_USER_NAME),
       lastName: config.get<string>(DEFAULT_USER_LAST_NAME),
-      user: config.get<string>(DEFAULT_USER),
+      userName: config.get<string>(DEFAULT_USER),
       password: config.get<string>(DEFAULT_USER_PASSWORD),
       rol: config.get<string>(DEFAULT_USER_ROL),
     });

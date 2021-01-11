@@ -21,7 +21,7 @@ export class User {
   lastName: string;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
-  user: string;
+  userName: string;
 
   @Column({ type: 'varchar', length: 128, nullable: false, select: false })
   password: string;

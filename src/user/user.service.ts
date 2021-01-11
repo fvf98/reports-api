@@ -4,6 +4,11 @@ import { Repository } from 'typeorm';
 import { CreateUserDto, EditUserDto } from './dtos';
 import { User } from './entities';
 
+export interface UserFindOne {
+    id?: number;
+    userName?: string;
+}
+
 @Injectable()
 export class UserService {
     constructor(
@@ -23,7 +28,7 @@ export class UserService {
     }
 
     async createOne(dto: CreateUserDto) {
-        const userExist = await this.userRepository.findOne({ user: dto.user });
+        const userExist = await this.userRepository.findOne({ userName: dto.userName });
         if (userExist)
             throw new BadRequestException('User already registered');
 
@@ -43,6 +48,14 @@ export class UserService {
     async deleteOne(id: number) {
         const user = await this.getOne(id);
         return await this.userRepository.remove(user);
+    }
+
+    async findOne(data: UserFindOne) {
+        return await this.userRepository
+            .createQueryBuilder('user')
+            .where(data)
+            .addSelect('user.password')
+            .getOne();
     }
 
 }

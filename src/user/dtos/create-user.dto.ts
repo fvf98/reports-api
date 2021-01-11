@@ -22,7 +22,7 @@ export class CreateUserDto {
   lastName: string;
 
   @IsString()
-  user: string;
+  userName: string;
 
   @IsString()
   @MinLength(8)

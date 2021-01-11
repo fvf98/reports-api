@@ -7,6 +7,9 @@ import { DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABAS
 import { ReportModule } from './report/report.module';
 import { UserModule } from './user/user.module';
 import { IssueModule } from './issue/issue.module';
+import { AuthModule } from './auth/auth.module';
+import { AccessControlModule } from 'nest-access-control';
+import { roles } from './app.roles';
 
 @Module({
   imports: [
@@ -30,9 +33,11 @@ import { IssueModule } from './issue/issue.module';
         logger: 'file',
       }),
     }),
+    AccessControlModule.forRoles(roles),
     ReportModule,
     UserModule,
-    IssueModule
+    IssueModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
