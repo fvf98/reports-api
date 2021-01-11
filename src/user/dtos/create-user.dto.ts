@@ -29,7 +29,6 @@ export class CreateUserDto {
   @MaxLength(128)
   password: string;
 
-  @IsArray()
   @IsEnum(AppRoles, {
     each: true,
     message: `must be a valid role value, ${EnumToString(AppRoles)}`,
