@@ -2,7 +2,7 @@ import { RolesBuilder } from "nest-access-control";
 
 export enum AppRoles {
   ADMIN = 'Admin',
-  GROUP_LEADER = 'Lider de grupo',
+  GROUP_LEADER = 'Jefe de grupo',
   JANITOR = 'Intendente',
 }
 
@@ -15,17 +15,15 @@ export enum AppResource {
 export const roles: RolesBuilder = new RolesBuilder();
 
 roles
-  // GROUP_LEADER ROLES
-  .grant(AppRoles.GROUP_LEADER)
-  .updateOwn([AppResource.USER])
-  .createOwn([AppResource.REPORT])
-  .updateOwn([AppResource.REPORT])
-  .deleteOwn([AppResource.REPORT])
   //JANITOR ROLES
-  .grant(AppRoles.GROUP_LEADER)
+  .grant(AppRoles.JANITOR)
   .updateOwn([AppResource.USER])
   .updateAny([AppResource.REPORT])
   .deleteAny([AppResource.REPORT])
+  // GROUP_LEADER ROLES
+  .grant(AppRoles.GROUP_LEADER)
+  .extend(AppRoles.JANITOR)
+  .createOwn([AppResource.REPORT])
   // ADMIN ROLES
   .grant(AppRoles.ADMIN)
   .extend(AppRoles.GROUP_LEADER)

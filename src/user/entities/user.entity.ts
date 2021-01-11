@@ -27,7 +27,7 @@ export class User {
   password: string;
 
   @Column({ type: 'varchar', length: 15 })
-  rol: string;
+  roles: string;
 
   @Column({ type: 'bool', default: true })
   status: boolean;

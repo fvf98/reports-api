@@ -19,7 +19,7 @@ export const setDefaultUser = async (config: ConfigService) => {
       lastName: config.get<string>(DEFAULT_USER_LAST_NAME),
       userName: config.get<string>(DEFAULT_USER),
       password: config.get<string>(DEFAULT_USER_PASSWORD),
-      rol: config.get<string>(DEFAULT_USER_ROL),
+      roles: config.get<string>(DEFAULT_USER_ROL),
     });
 
     return await userRepository.save(adminUser);
