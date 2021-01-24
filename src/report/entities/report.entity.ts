@@ -57,7 +57,7 @@ export class Report {
             this.status = "P";
             return;
         }
-        this.status = "A";
+        if (this.status != "T") this.status = "A";
     }
 
     @Column({ type: 'char', default: 'P' }) // 'P' is for pending

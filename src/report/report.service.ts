@@ -37,6 +37,12 @@ export class ReportService {
         return await this.reportRepository.save(editedPost);
     }
 
+    async finishOne(id: number) {
+        let dto = await this.getById(id);
+        dto.status = "T";
+        return await this.reportRepository.save(dto);
+    }
+
     async deleteOne(id: number, author?: User) {
         const report = await this.getById(id, author);
         return await this.reportRepository.remove(report);

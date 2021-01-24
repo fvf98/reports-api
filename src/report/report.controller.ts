@@ -68,6 +68,19 @@ export class ReportController {
 
     @Auth({
         resource: AppResource.REPORT,
+        action: 'update',
+        possession: 'own',
+    })
+    @Get('/finish/:id')
+    async finishOne(
+        @Param('id') id: number
+    ) {
+        const data = await this.reportService.finishOne(id);
+        return { message: 'Report edited', data };
+    }
+
+    @Auth({
+        resource: AppResource.REPORT,
         action: 'delete',
         possession: 'own',
     })

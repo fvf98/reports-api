@@ -10,6 +10,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const logger = new Logger('Bootstrap');
   const config = app.get(ConfigService);
+  app.enableCors();
   const port = parseInt(config.get<string>(SERVER_PORT), 10) || 3000;
 
   initSwagger(app);
