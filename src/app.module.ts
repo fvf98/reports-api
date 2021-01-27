@@ -10,6 +10,7 @@ import { IssueModule } from './issue/issue.module';
 import { AuthModule } from './auth/auth.module';
 import { AccessControlModule } from 'nest-access-control';
 import { roles } from './app.roles';
+import { PerformanceModule } from './performance/performance.module';
 
 @Module({
   imports: [
@@ -37,7 +38,8 @@ import { roles } from './app.roles';
     ReportModule,
     UserModule,
     IssueModule,
-    AuthModule
+    AuthModule,
+    PerformanceModule
   ],
   controllers: [AppController],
   providers: [AppService],

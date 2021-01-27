@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Issue } from 'src/issue/entities';
+import { PerformanceService } from 'src/performance/performance.service';
 import { User } from 'src/user/entities';
 import { Repository } from 'typeorm';
 import { CreateReportDto, EditReportDto } from './dtos';
@@ -9,6 +10,7 @@ import { Report } from './entities';
 @Injectable()
 export class ReportService {
     constructor(
+        private readonly performanceService: PerformanceService,
         @InjectRepository(Report)
         private readonly reportRepository: Repository<Report>,
     ) { }
@@ -39,6 +41,7 @@ export class ReportService {
 
     async finishOne(id: number) {
         let dto = await this.getById(id);
+        await this.performanceService.addTask(dto.asigned);
         dto.status = "T";
         return await this.reportRepository.save(dto);
     }

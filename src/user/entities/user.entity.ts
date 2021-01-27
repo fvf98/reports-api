@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { hash } from 'bcryptjs';
 import { Report } from 'src/report/entities';
+import { Performance } from 'src/performance/entities/performance.entity';
 
 @Entity('users')
 export class User {
@@ -47,4 +48,11 @@ export class User {
     { cascade: true },
   )
   report: Report;
+
+  @OneToOne(
+    _ => Performance,
+    performance => performance.janitor,
+    { cascade: true },
+  )
+  performance: Performance;
 }
