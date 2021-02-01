@@ -11,7 +11,7 @@ async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const config = app.get(ConfigService);
   app.enableCors();
-  const port = parseInt(config.get<string>(SERVER_PORT), 10) || 3000;
+  const port = parseInt(process.env.PORT) || 8080;
 
   initSwagger(app);
   setDefaultUser(config);
@@ -22,7 +22,7 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   logger.log(`Server is running at ${await app.getUrl()}`);
 }
 bootstrap();

@@ -21,6 +21,4 @@ export class CreateReportDto {
     @IsArray()
     images: string[];
 
-    @IsNumber()
-    author: number;
 }

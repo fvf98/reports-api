@@ -6,6 +6,7 @@ import { User, Auth, Issue } from 'src/common/decorators';
 import { Issue as IssueEntity } from 'src/issue/entities';
 import { User as UserEntity } from 'src/user/entities';
 import { CreateReportDto, EditReportDto } from './dtos';
+import { AssignReport } from './dtos/assign-report.dto';
 import { ReportService } from './report.service';
 
 @ApiTags('Reports')
@@ -20,6 +21,12 @@ export class ReportController {
     @Get()
     async getMany() {
         const data = await this.reportService.getMany();
+        return { data };
+    }
+
+    @Get('/user/:id')
+    async getByUser(@Param('id', ParseIntPipe) id: number) {
+        const data = await this.reportService.getByUser(id);
         return { data };
     }
 
@@ -62,6 +69,22 @@ export class ReportController {
             // Puede editar solo los propios...
             data = await this.reportService.editOne(id, dto, author);
         }
+
+        return { message: 'Report edited', data };
+    }
+
+    @Auth({
+        resource: AppResource.REPORT,
+        action: 'update',
+        possession: 'own',
+    })
+    @Put('/assign/:id')
+    async assignOne(
+        @Param('id') id: number,
+        @Body() dto: AssignReport
+    ) {
+
+        const data = await this.reportService.assignOne(id, dto);
 
         return { message: 'Report edited', data };
     }
