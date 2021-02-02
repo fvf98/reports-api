@@ -60,9 +60,17 @@ export class Report {
         if (this.status != "T") this.status = "A";
     }
 
+    @BeforeUpdate()
+    async doneChange() {
+        if(this.status = "T") this.doneAt = new Date();
+    }
+
     @Column({ type: 'char', default: 'P' }) // 'P' is for pending
     status: string;
 
     @CreateDateColumn({ type: 'timestamp' })
     createdAt: Date;
+
+    @Column({ type: 'timestamp' })
+    doneAt: Date;
 }
