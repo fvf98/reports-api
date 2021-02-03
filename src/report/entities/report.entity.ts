@@ -62,7 +62,7 @@ export class Report {
 
     @BeforeUpdate()
     async doneChange() {
-        if(this.status = "T") this.doneAt = new Date();
+        if(this.status == "T") this.doneAt = new Date();
     }
 
     @Column({ type: 'char', default: 'P' }) // 'P' is for pending
